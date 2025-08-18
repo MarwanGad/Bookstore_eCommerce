@@ -1,76 +1,82 @@
-<div class="container-fluid">
-  <div id="carouselExampleAutoplaying" class="carousel slide w-100" data-bs-ride="carousel">
-    
-    <div class="carousel-inner custom-carousel">
-      <div 
-        class="carousel-item" 
-        *ngFor="let book of books$ | async; let i = index"
-        [class.active]="i === 0">
-        
-        <div class="row d-flex justify-content-center align-items-center ps-5 pe-5">
-          
-          <div class="col-md-7 text-center">
-            <img [src]="book.imgUrl" 
-                 class="img-fluid rounded img-shadow"
-                 alt="{{ book.title }}">
-          </div>
-  
-          <div class="col-md-5 d-flex flex-column align-items-start tabs-font tabs-font-family">
-            <h3 class="mt-4">{{ book.title }}</h3>
-            <p>{{ book.description }}</p>
-            <button class="btn tabs-font tabs-font-family" [routerLink]="['/products/',book.id]">View More</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-      <span class="carousel-control-next-icon"></span>
-    </button>
-  </div>
+<div class="d-flex justify-content-center align-items-center" style="height: 400px;" *ngIf="loading" >
+  <ng-lottie [options]="options" style="width: 200px; height: 200px;"></ng-lottie>
 </div>
-<div class="mt-4 d-flex flex-column">
-  <h1 class="text-center tabs-font-family">New Releases</h1>
 
-  <div id="newReleasesCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-
-      <div class="carousel-item active">
-        <div class="d-flex justify-content-center gap-3">
-          <div class="card" style="width: 18rem;" *ngFor="let book of (books$ | async)?.slice(0,4)">
-            <img [src]="book.imgUrl" class="card-img-top h-100" alt="{{book.title}}">
-            <div class="card-body">
-              <h5 class="card-title">{{book.title}}</h5>
-              <p class="card-text">{{book.description | title}}</p>
-              <a [routerLink]="['/products/', book.id]" class="btn btn-primary">View More</a>
+<div #content class="content" *ngIf="!loading">
+  <div class="container-fluid">
+    <div id="carouselExampleAutoplaying" class="carousel slide w-100" data-bs-ride="carousel">
+      
+      <div class="carousel-inner custom-carousel">
+        <div 
+          class="carousel-item" 
+          *ngFor="let book of books$ | async; let i = index"
+          [class.active]="i === 0">
+          
+          <div class="row d-flex justify-content-center align-items-center ps-5 pe-5">
+            
+            <div class="col-md-7 text-center">
+              <img [src]="book.imgUrl" 
+                   class="img-fluid rounded img-shadow"
+                   alt="{{ book.title }}">
+            </div>
+    
+            <div class="col-md-5 d-flex flex-column align-items-start tabs-font tabs-font-family">
+              <h3 class="mt-4">{{ book.title }}</h3>
+              <p>{{ book.description }}</p>
+              <button class="btn tabs-font tabs-font-family" [routerLink]="['/products/',book.id]">View More</button>
             </div>
           </div>
         </div>
       </div>
-
-      <div class="carousel-item">
-        <div class="d-flex justify-content-center gap-3">
-          <div class="card" style="width: 18rem;" *ngFor="let book of (books$ | async)?.slice(4,6)">
-            <img [src]="book.imgUrl" class="card-img-top h-100" alt="{{book.title}}">
-            <div class="card-body">
-              <h5 class="card-title">{{book.title}}</h5>
-              <p class="card-text">{{book.description | title}}</p>
-              <a [routerLink]="['/products/', book.id]" class="btn btn-primary">View More</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
+  
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
     </div>
-
-    <button class="carousel-control-prev" type="button" data-bs-target="#newReleasesCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon red"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#newReleasesCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon"></span>
-    </button>
+  </div>
+  <div class="mt-4 d-flex flex-column">
+    <h1 class="text-center tabs-font-family">New Releases</h1>
+  
+    <div id="newReleasesCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+  
+        <div class="carousel-item active">
+          <div class="d-flex justify-content-center gap-3">
+            <div class="card" style="width: 18rem;" *ngFor="let book of (books$ | async)?.slice(0,4)">
+              <img [src]="book.imgUrl" class="card-img-top h-100" alt="{{book.title}}">
+              <div class="card-body">
+                <h5 class="card-title">{{book.title}}</h5>
+                <p class="card-text">{{book.description | title}}</p>
+                <a [routerLink]="['/products/', book.id]" class="btn btn-primary">View More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="carousel-item">
+          <div class="d-flex justify-content-center gap-3">
+            <div class="card" style="width: 18rem;" *ngFor="let book of (books$ | async)?.slice(4,6)">
+              <img [src]="book.imgUrl" class="card-img-top h-100" alt="{{book.title}}">
+              <div class="card-body">
+                <h5 class="card-title">{{book.title}}</h5>
+                <p class="card-text">{{book.description | title}}</p>
+                <a [routerLink]="['/products/', book.id]" class="btn btn-primary">View More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+  
+      <button class="carousel-control-prev" type="button" data-bs-target="#newReleasesCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon red"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#newReleasesCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
   </div>
 </div>

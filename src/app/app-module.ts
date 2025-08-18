@@ -32,7 +32,10 @@ import { TitlePipe } from './pipes/title-pipe';
 import { BookComponent } from './book/book.component';
 import { ProductFilterComponent } from './product-filter/product-filter.component';
 import { ProductCardComponent } from './product-card/product-card.component';
+import { LottieComponent, provideLottieOptions } from 'ngx-lottie';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
+import player from 'lottie-web';
 
 @NgModule({
   declarations: [
@@ -77,13 +80,19 @@ import { ProductCardComponent } from './product-card/product-card.component';
       { path: 'admin/users' , component: AdminUsersComponent , canActivate: [AuthGaurd,AdminAuthGaurdService]}
     ]),
     NgbModule,
-    FormsModule
+    FormsModule,
+    LottieComponent
+
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
-    provideDatabase(() => getDatabase())
+    provideDatabase(() => getDatabase()),
+    provideAnimations(),
+    provideLottieOptions({
+      player: () => player
+    })
   ],
   bootstrap: [App]
 })
