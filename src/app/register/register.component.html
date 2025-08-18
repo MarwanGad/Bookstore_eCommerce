@@ -1,60 +1,63 @@
-<div class="d-flex justify-content-evenly m-5">
-       <div class="" >
-              <form #f="ngForm" (ngSubmit)="onSubmit(f.value)" class="flex-fill d-flex flex-column gap-3" style="max-width: 500px;">
-                     <div class="form-group">
-                            <label class="tabs-font-family tabs-font" 
-                                   for="username">
-                                   Username
-                            </label>
-                            <input type="text"
-                                   ngModel
-                                   name="username" 
-                                   class="form-control" 
-                                   id="username" 
-                                   placeholder="Enter Username">        
-                     </div>
-                     <div class="form-group">
-                            <label class="tabs-font-family tabs-font" 
-                                   for="email">
-                                   Email address
-                            </label>
-                            <input type="email" 
-                                   ngModel
-                                   name="email"
-                                   class="form-control" 
-                                   id="email" 
-                                   placeholder="Enter email">        
-                     </div>
-                     <div class="form-group">
-                            <label class="tabs-font-family tabs-font" 
-                                   for="password">
-                                   Password
-                            </label>
-                            <input type="password"
-                                   ngModel
-                                   name="password" 
-                                   class="form-control" 
-                                   id="password" 
-                                   placeholder="Password">
-                     </div>
-                     <button type="submit" 
-                            class="btn btn-primary tabs-font-family">
-                            Register
-                     </button>
-              </form>
+<div class="d-flex flex-column align-items-center m-5">
+       <div class="d-flex justify-content-between gap-5">
+              <div class="" >
+                     <form #f="ngForm" (ngSubmit)="onSubmit(f.value)" class="flex-fill d-flex flex-column gap-3" style="max-width: 500px;">
+                            <div class="form-group">
+                                   <label class="tabs-font-family tabs-font" 
+                                          for="username">
+                                          Username
+                                   </label>
+                                   <input type="text"
+                                          ngModel
+                                          name="username" 
+                                          class="form-control" 
+                                          id="username" 
+                                          placeholder="Enter Username">        
+                            </div>
+                            <div class="form-group">
+                                   <label class="tabs-font-family tabs-font" 
+                                          for="email">
+                                          Email address
+                                   </label>
+                                   <input type="email" 
+                                          ngModel
+                                          name="email"
+                                          class="form-control" 
+                                          id="email" 
+                                          placeholder="Enter email">        
+                            </div>
+                            <div class="form-group">
+                                   <label class="tabs-font-family tabs-font" 
+                                          for="password">
+                                          Password
+                                   </label>
+                                   <input type="password"
+                                          ngModel
+                                          name="password" 
+                                          class="form-control" 
+                                          id="password" 
+                                          placeholder="Password">
+                            </div>
+                            <button type="submit" 
+                                   class="btn btn-primary tabs-font-family">
+                                   Register
+                            </button>
+                     </form>
+              </div>
+              <div class="">
+                     <img src="/registerPhoto.png" class="img-fluid" alt="..." style="max-height: 470px;">
+                     <img src="/registerPhoto2.png" class="img-fluid" alt="..." style="max-height: 470px;">
+              </div>
        </div>
-       <div class="">
-              <img src="/registerPhoto.png" class="img-fluid" alt="..." style="max-height: 470px;">
-              <img src="/registerPhoto2.png" class="img-fluid" alt="..." style="max-height: 470px;">
+       <div class=" p-3" style="z-index: 1200;">
+              <ngb-toast
+              *ngIf="errorMessage"
+              [autohide]="true"
+              [delay]="3000"
+              class="bg-danger text-white shadow"
+              (hidden)="errorMessage = null">
+              {{ errorMessage }}
+              </ngb-toast>
        </div>
-</div>
-<div class=" p-3" style="z-index: 1200;">
-       <ngb-toast
-       *ngIf="errorMessage"
-       [autohide]="true"
-       [delay]="3000"
-       class="bg-danger text-white shadow"
-       (hidden)="errorMessage = null">
-       {{ errorMessage }}
-       </ngb-toast>
+
 </div>
