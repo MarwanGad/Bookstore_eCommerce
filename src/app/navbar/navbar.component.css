@@ -64,22 +64,21 @@
 
 
 }
-
-.navbar-logo {
-  max-height: 70px;
-  height: auto;
-}
-
-.account-style{
-   min-width: 150px;
-   justify-content: flex-end;
-}
-
 .navbar-container {
   height: 150px;
   transition: height 0.3s ease;
 }
 
+.navbar-logo {
+  max-height: 70px;
+  height: auto;
+  transition: max-height 0.3s ease;
+}
+
 .navbar-container.shrink {
   height: 80px;
+}
+
+.navbar-container.shrink .navbar-logo {
+  max-height: 40px;
 }
