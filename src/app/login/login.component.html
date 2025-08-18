@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-center align-items-center">
+<div class="d-flex flex-column align-items-center ">
 
     <form #f="ngForm" 
           (ngSubmit)="login(f.value)" 
@@ -32,4 +32,14 @@
                     Login
             </button>
     </form>
+    <div class=" p-3" style="z-index: 1200;">
+           <ngb-toast
+           *ngIf="errorMessage"
+           [autohide]="true"
+           [delay]="3000"
+           class="bg-danger text-white shadow"
+           (hidden)="errorMessage = null">
+           {{ errorMessage }}
+           </ngb-toast>
+    </div>
 </div>

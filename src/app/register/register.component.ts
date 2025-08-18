@@ -10,6 +10,8 @@ import { UserService } from '../services/user.service';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
+  errorMessage: string | null = null;
+
 
   constructor(private router: Router,private auth: AuthService, private user: UserService){}
 
@@ -19,8 +21,14 @@ export class RegisterComponent {
     const password = registerValues?.password;
 
     this.auth.register(email,username,password)
-      .subscribe(response => {
-        this.router.navigate(['/']);
+      .subscribe({
+        next: () => {
+          console.log('success');
+          this.router.navigate(['/'])
+        },
+        error: (err) => {
+          this.errorMessage = err.message.replace(/^Firebase:\s*/i, '');
+        }
       })
 
   }

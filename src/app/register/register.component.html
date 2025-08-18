@@ -1,5 +1,5 @@
-<div class="row mt-5">
-       <div class="col-md-6" >
+<div class="d-flex justify-content-evenly m-5">
+       <div class="" >
               <form #f="ngForm" (ngSubmit)="onSubmit(f.value)" class="flex-fill d-flex flex-column gap-3" style="max-width: 500px;">
                      <div class="form-group">
                             <label class="tabs-font-family tabs-font" 
@@ -43,8 +43,18 @@
                      </button>
               </form>
        </div>
-       <div class="col-md-6">
+       <div class="">
               <img src="/registerPhoto.png" class="img-fluid" alt="..." style="max-height: 470px;">
               <img src="/registerPhoto2.png" class="img-fluid" alt="..." style="max-height: 470px;">
        </div>
+</div>
+<div class=" p-3" style="z-index: 1200;">
+       <ngb-toast
+       *ngIf="errorMessage"
+       [autohide]="true"
+       [delay]="3000"
+       class="bg-danger text-white shadow"
+       (hidden)="errorMessage = null">
+       {{ errorMessage }}
+       </ngb-toast>
 </div>

@@ -10,6 +10,8 @@ import { UserService } from '../services/user.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  errorMessage: string | null = null;
+
   constructor(private user: UserService ,private route: ActivatedRoute ,private auth: AuthService, private router: Router){}
 
   login(loginValues: any){
@@ -18,11 +20,16 @@ export class LoginComponent {
     const username = loginValues?.username;
     const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
     this.auth.login(email,password,username)
-      .subscribe(response => {
-        if(returnUrl)
-          this.router.navigate([returnUrl]);
-        else{
-          this.router.navigate(['/']);
+      .subscribe({
+        next: () =>{
+          if(returnUrl)
+            this.router.navigate([returnUrl]);
+          else{
+            this.router.navigate(['/']);
+          }
+        },
+        error: (err) => {
+          this.errorMessage = err.message.replace(/^Firebase:\s*/i, '');
         }
       })
 
