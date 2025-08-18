@@ -1,0 +1,35 @@
+<div class="d-flex justify-content-center align-items-center">
+
+    <form #f="ngForm" 
+          (ngSubmit)="login(f.value)" 
+          class=" flex-column gap-3 mt-4">
+        <div class="form-group">
+            <label class="tabs-font-family tabs-font" 
+                    for="email">
+                    Email address
+            </label>
+            <input type="email" 
+                    ngModel
+                    name="email"
+                    class="form-control" 
+                    id="email" 
+                    placeholder="Enter email">        
+        </div>
+        <div class="form-group">
+            <label class="tabs-font-family tabs-font" 
+                    for="password">
+                    Password
+            </label>
+            <input type="password"
+                    ngModel
+                    name="password" 
+                    class="form-control" 
+                    id="password" 
+                    placeholder="Password">
+        </div>
+            <button type="submit" 
+                    class="btn btn-primary tabs-font-family">
+                    Login
+            </button>
+    </form>
+</div>

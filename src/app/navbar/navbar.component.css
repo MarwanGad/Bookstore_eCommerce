@@ -1,0 +1,85 @@
+.tiro-devanagari-sanskrit-regular {
+  font-family: "Tiro Devanagari Sanskrit", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+
+.border-thick{
+    height: 75% !important;  
+    width: 100% !important;
+    background-color: #29292A !important;
+    border-top: 5px solid #4e4e4f;
+    border-bottom: 5px solid #4e4e4f;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+}
+
+.nav-button-active {
+  color: #605f5fb3 !important;
+
+}
+
+
+.brand-name{
+    text-decoration: none;
+}
+
+.bg-color{
+    background-color: #2F2617;
+}
+
+.tabs-font{
+    color: #ae7036;
+    font-size: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.tabs-font-family{
+  font-family: "Tiro Devanagari Sanskrit", serif;
+
+}
+
+
+.tabs-font::after{
+  content: "";
+  position: absolute;
+  left:0;
+  bottom: -1px;
+  width: 0%;
+  height: 1px;
+  background-color:#cf9e65;
+  transition: width 0.3s ease;
+}
+
+.tabs-font:hover::after {
+  width: 100%;
+}
+
+.active-link::after,
+.active-link{
+ width: 100%; 
+     color: #ad7f55;
+
+
+}
+
+.navbar-logo {
+  max-height: 70px;
+  height: auto;
+}
+
+.account-style{
+   min-width: 150px;
+   justify-content: flex-end;
+}
+
+.navbar-container {
+  height: 150px;
+  transition: height 0.3s ease;
+}
+
+.navbar-container.shrink {
+  height: 80px;
+}

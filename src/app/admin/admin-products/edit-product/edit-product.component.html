@@ -1,0 +1,118 @@
+<div class="row m-5 d-flex justify-content-evenly">
+    <div class="col-md-6">
+        <form #f="ngForm" (ngSubmit)="updateBook(f.value)" class="flex-fill d-flex flex-column gap-3">
+            <div class="form-group">
+                <label class="tabs-font-family tabs-font" 
+                        for="title">
+                        Title
+                </label>
+                <input type="text"
+                        [(ngModel)]="bookToEdit.title"
+                        #title="ngModel"
+                        required
+                        name="title" 
+                        class="form-control" 
+                        id="title" 
+                        placeholder="Enter Title">        
+            </div>
+            <div class="form-group">
+                <label class="tabs-font-family tabs-font" 
+                        for="author">
+                        Author
+                </label>
+                <input type="text"
+                        [(ngModel)]="bookToEdit.author"
+                        #author="ngModel"
+                        required
+                        name="author" 
+                        class="form-control" 
+                        id="author" 
+                        placeholder="Enter Author">        
+            </div>
+            <div class="alert alert-danger" *ngIf="author.touched && author.invalid">
+                <div *ngIf="author.errors?.['required']">author is required</div>
+            </div>
+            <div class="form-group">
+            <label class="tabs-font-family tabs-font" 
+                    for="price">
+                    Price
+            </label>
+            <input type="number" 
+                    [(ngModel)]="bookToEdit.price"
+                    #price="ngModel"
+                    required
+                    name="price"
+                    class="form-control" 
+                    id="price" 
+                    placeholder="Enter Price">        
+            </div>
+            <div class="alert alert-danger" *ngIf="price.touched && price.invalid">
+                <div *ngIf="price.errors?.['required']">Price is required</div>
+            </div>
+            <div class="form-group">
+            <label class="tabs-font-family tabs-font" 
+                    for="genre">
+                    Genre
+            </label>
+            <select class="form-select"
+                    [(ngModel)]="bookToEdit.genre"
+                    #genre="ngModel"
+                    required
+                    name="genre"
+                    id="genre">
+                <option selected></option>
+                <option *ngFor="let g of genres$ | async" [value]="g.name">
+                    {{g.name}}
+                </option>
+            </select>
+            <div class="alert alert-danger" *ngIf="genre.touched && genre.invalid">
+                <div *ngIf="genre.errors?.['required']">You must choose a genre</div>
+            </div>
+            </div>
+            <div class="form-group">
+            <label class="tabs-font-family tabs-font" 
+                    for="description">
+                    Description
+            </label>
+            <textarea type="text"
+                    [(ngModel)]="bookToEdit.description"
+                    #description="ngModel"
+                    required
+                    name="description" 
+                    class="form-control" 
+                    id="description" 
+                    placeholder="Book description">
+            </textarea>
+            </div>
+            <div class="alert alert-danger" *ngIf="description.touched && description.invalid">
+                <div *ngIf="description.errors?.['required']">Description is required</div>
+            </div>
+                        <div class="form-group">
+                <label class="tabs-font-family tabs-font" 
+                        for="imgUrl">
+                        Img Url
+                </label>
+                <input type="url"
+                        [(ngModel)]="bookToEdit.imgUrl"
+                        #imgUrl="ngModel"
+                        required
+                        name="imgUrl" 
+                        class="form-control" 
+                        id="imgUrl" 
+                        placeholder="Enter imgUrl">        
+            </div>
+            <button  type="submit" 
+                    class="btn btn-primary tabs-font-family">
+                    Save
+            </button>
+            <button  type="button" (click)="deleteBook()"
+                    class="btn btn-primary tabs-font-family">
+                    Delete
+            </button>
+        </form>
+    </div>
+    <div class="col-md-2 ">
+        <product-card [bookObj]="f.value"></product-card>
+    </div>
+</div>
+

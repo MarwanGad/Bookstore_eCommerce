@@ -1,0 +1,32 @@
+<!-- <div class="card custom-card" style="height: 100%;">
+    <img [src]="bookObj.imgUrl" class="card-img-top img-fluid" style="height: 50%; width: 50%;" >
+    <div class="card-body">
+        <h5 class="card-title tabs-font tabs-font-family">Title: {{bookObj.title}}</h5>
+        <h5><p class="card-text tabs-font tabs-font-family">Author: {{bookObj.author}}</p></h5>
+        <h5><p class="card-text tabs-font tabs-font-family">Description: {{bookObj.description}}</p></h5>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Genre: {{bookObj.genre}}</li>
+        <li class="list-group-item">Price:  {{bookObj.price | currency:'EGP'}}</li>
+    </ul>
+</div> -->
+
+
+<div class="row  ">
+    <div class="card  custom-card text-center p-2">
+        <img [src]="bookObj.imgUrl ? bookObj.imgUrl : 'https://www.mariposakids.co.nz/wp-content/uploads/2014/08/image-placeholder2.jpg'" class="card-img-top img-fluid" alt="Book cover">
+        <div class="card-body d-flex flex-column">
+        <h6 class="card-title tabs-font tabs-font-family">{{ bookObj.title }}</h6>
+        <h6 class="card-title tabs-font tabs-font-family">{{ bookObj.author }}</h6>
+        <h6 class="cart-title tabs-font">
+            {{ bookObj.genre}}..
+        </h6>
+        <h6 class="cart-title tabs-font">
+            {{ bookObj.description | title}}..
+        </h6>
+        <h6 class="card-title tabs-font tabs-font-family price-text mt-auto">
+            {{ bookObj.price }} EGP
+        </h6>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="bg-color navbar-container sticky-top"  [class.shrink]="isShrunk" style="  display: flex; align-items: center; justify-content: center;">
+  <div class="border-thick bg-black d-flex align-items-center justify-content-between p-4 mt-3">
+
+  
+    <div class="d-flex align-items-center gap-1">
+      <a class="nav-link  tabs-font tabs-font-family" 
+         routerLink="/" 
+         routerLinkActive="active-link"
+         [routerLinkActiveOptions]="{exact:true}">Home</a>
+      <a class="nav-link  tabs-font tabs-font-family" 
+         routerLink="/products"
+         routerLinkActive="active-link"
+         [routerLinkActiveOptions]="{exact: true}"
+         [queryParamsHandling]="'merge'">Products</a>
+    </div>
+
+ 
+    <a class="brand-name" routerLink="/">
+      <img class="navbar-logo " src="/mysticFallsLogo.png" alt="Mystic Falls Bookstore">
+    </a>
+
+    
+    <div class="d-flex align-items-center gap-1 account-style"  style="min-width: 150px; justify-content: flex-end;">
+      <div class="nav-item dropdown ms-auto" ngbDropdown *ngIf="currentUser; else guest">
+        <a class="nav-link dropdown-toggle tabs-font-family" 
+        style="color: #ae7036;" 
+        data-bs-toggle="dropdown" 
+        role="button" 
+        aria-expanded="false" 
+        ngbDropdownToggle>
+        {{ currentUser.username }}
+        </a>
+        <ul class="dropdown-menu" ngbDropdownMenu>
+          <li><a class="dropdown-item" routerLink="/account/profile">Profile</a></li>
+          <li><a class="dropdown-item" routerLink="/account/my-orders">My Orders</a></li>
+          <li><hr class="dropdown-divider"></li>
+    
+          <li><a class="dropdown-item" routerLink="/admin/orders" *ngIf="currentUser.isAdmin">Manage Orders</a></li>
+          <li><a class="dropdown-item" routerLink="/admin/products" *ngIf="currentUser.isAdmin" >Manage Products</a></li>
+          <li><a class="dropdown-item" routerLink="/admin/users" *ngIf="currentUser.isAdmin">Manage Users</a></li>
+      
+          <li><hr class="dropdown-divider"></li>
+          <li><a (click)="logout()" class="dropdown-item" style="cursor: pointer;" >Logout</a></li>
+        </ul>
+      </div>
+      <ng-template #guest>
+        <div class="d-flex gap-1">
+          <a class="nav-link  tabs-font tabs-font-family" 
+             routerLink="/login"
+             routerLinkActive="active-link">Login</a>
+          <a class="nav-link  tabs-font tabs-font-family" 
+             routerLink="/register"
+             routerLinkActive="active-link">Register</a>
+        </div>
+      </ng-template>
+    </div>
+
+  </div>
+</div>

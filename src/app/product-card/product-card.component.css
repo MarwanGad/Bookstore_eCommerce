@@ -1,0 +1,7 @@
+.custom-card {
+    border: none !important;
+    border-radius: 10px;
+    background-color: #29292A !important;
+    border: 3px solid #4e4e4f !important;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+}

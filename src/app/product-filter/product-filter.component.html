@@ -1,0 +1,46 @@
+<div class="sticky-top">
+    <p class="text-center ">Filter By</p>
+    <form #f="ngForm" class="tabs-font">
+        <div class="form-check form-check-inline" *ngFor="let option of ['genre','title','author','price']">
+        <input class="form-check-input"
+                ngModel
+                type="radio"
+                name="filterBy"
+                [id]="option"
+                [value]="option"
+                (change)="filterChanged(option)">
+        <label class="form-check-label" [for]="option">{{ option | titlecase }}</label>
+    </div>
+    </form>
+    <div class="list-group" *ngIf="f.value.filterBy === 'genre'">
+        <a class="list-group-item tabs-font tabs-font-family text-center p-3"
+            [routerLink]="path"
+            [routerLinkActiveOptions]="{exact: true}"
+            routerLinkActive="activeGenre">
+        Show All
+        </a>
+        <a class="list-group-item tabs-font tabs-font-family p-3 text-center" 
+            *ngFor="let genre of genres$ | async"
+            [routerLink]="path"
+            routerLinkActive="activeGenre"
+            [queryParams]="{genre: genre.id}">
+        {{genre.name}}
+        </a>
+    </div>
+    <div class="form-control title-filter" *ngIf="f.value.filterBy === 'title'">
+        <input name="search" 
+               #title
+               (keyup)="filter(title.value,f.value.filterBy)"
+               type="text" 
+               class="form-control" 
+               placeholder="Search by Title">
+    </div>
+    <div class="form-control title-filter" *ngIf="f.value.filterBy === 'author'">
+        <input name="search" 
+               #author
+               (keyup)="filter(author.value,f.value.filterBy)"
+               type="text" 
+               class="form-control" 
+               placeholder="Search by Author">
+    </div>
+</div>

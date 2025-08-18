@@ -1,0 +1,31 @@
+.list-group{
+  border-radius: 10px;
+}
+
+.list-group-item{
+  background-color: #29292a;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.list-group-item:hover,
+.activeGenre{
+  background-color: #424244;
+}
+
+.form-check-input:checked,
+.form-check-input:focus{
+    background-color: #29292a;
+    border: 1px solid #29292a;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+
+}
+
+.title-filter{
+    background-color: #29292a;
+    border-radius: 10px;
+}
+
+.sticky-top{
+  top: 100px;
+}
