@@ -37,6 +37,10 @@
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   filter: invert(100%) brightness(0); 
+  border-radius: 100px;
+  border: 3px black solid;
+  width: 50px;
+  height: 50px;
 }
 
 
