@@ -1,5 +1,13 @@
-.img-shadow {
-  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.4);
+.carousel-autoplay-img {
+  box-shadow: 10px 10px 50px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;
+  
+}
+
+.carousel-autoplay-img:hover {
+  transform: scale(1.05);;
 }
 
 .custom-carousel {
@@ -41,19 +49,4 @@
   border: 3px black solid;
   width: 50px;
   height: 50px;
-}
-
-
-
-.card {
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.3s ease;
-}
-
-.card:hover {
-  transform: scale(1.05);
 }

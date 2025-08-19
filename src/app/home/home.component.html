@@ -16,7 +16,7 @@
             
             <div class="col-md-7 text-center">
               <img [src]="book.imgUrl" 
-                   class="img-fluid rounded img-shadow"
+                   class="img-fluid rounded carousel-autoplay-img"
                    alt="{{ book.title }}">
             </div>
     
@@ -38,37 +38,23 @@
     </div>
   </div>
   <div class="mt-4 d-flex flex-column">
+    
     <h1 class="text-center tabs-font-family">New Releases</h1>
   
     <div id="newReleasesCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
-  
-        <div class="carousel-item active">
-          <div class="d-flex justify-content-center gap-3">
-            <div class="card" style="width: 18rem;" *ngFor="let book of (books$ | async)?.slice(0,4)">
-              <img [src]="book.imgUrl" class="card-img-top h-100" alt="{{book.title}}">
-              <div class="card-body">
-                <h5 class="card-title">{{book.title}}</h5>
-                <p class="card-text">{{book.description | title}}</p>
-                <a [routerLink]="['/products/', book.id]" class="btn btn-primary">View More</a>
-              </div>
-            </div>
+        <div class="carousel-item mt-4" 
+             *ngFor="let i of [0,1]; first as isFirstItem"
+             [class.active]="isFirstItem">
+          <div class="d-flex justify-content-center gap-5">
+            <product-card style="width: 18rem;" 
+                          *ngFor="let book of (books$ | async)?.slice( i*4,(i+1)*4)"
+                          [bookObj]="book"
+                          [hideDescription]="true"
+                          [clickAble]="true">
+            </product-card>
           </div>
-        </div>
-  
-        <div class="carousel-item">
-          <div class="d-flex justify-content-center gap-3">
-            <div class="card" style="width: 18rem;" *ngFor="let book of (books$ | async)?.slice(4,6)">
-              <img [src]="book.imgUrl" class="card-img-top h-100" alt="{{book.title}}">
-              <div class="card-body">
-                <h5 class="card-title">{{book.title}}</h5>
-                <p class="card-text">{{book.description | title}}</p>
-                <a [routerLink]="['/products/', book.id]" class="btn btn-primary">View More</a>
-              </div>
-            </div>
-          </div>
-        </div>
-  
+        </div>  
       </div>
   
       <button class="carousel-control-prev" type="button" data-bs-target="#newReleasesCarousel" data-bs-slide="prev">

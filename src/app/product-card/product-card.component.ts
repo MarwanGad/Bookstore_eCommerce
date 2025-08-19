@@ -10,5 +10,8 @@ import { bookInterface } from '../models/book.interface';
 export class ProductCardComponent {
 
   @Input('bookObj') bookObj!: bookInterface
+  @Input('hideDescription') hideDescription: boolean = false;
+  @Input('clickAble') clickAble: boolean = false;
+
 
 }

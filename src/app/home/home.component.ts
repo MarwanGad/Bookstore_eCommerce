@@ -14,6 +14,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 })
 export class HomeComponent {
   books$: Observable<bookInterface[]>;
+
   loading = true;
   options: AnimationOptions = {
     path: '/Book.json'
