@@ -31,6 +31,7 @@
     "@ng-bootstrap/ng-bootstrap": "^19.0.1",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.7",
+    "bootstrap-icons": "^1.13.1",
     "firebase": "^12.1.0",
     "lottie-web": "^5.13.0",
     "ng2-validation": "^4.2.0",

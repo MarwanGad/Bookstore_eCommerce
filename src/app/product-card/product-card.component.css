@@ -6,13 +6,16 @@
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
 }
 
-.clickAble-card{
+.clickAble-card,
+i{
   cursor: pointer;
   width: 100%;
   height: 100%;
   transition: transform 0.3s ease;
 }
 
-.clickAble-card:hover {
+.clickAble-card:hover,
+i:hover {
   transform: scale(1.05);
 }
+

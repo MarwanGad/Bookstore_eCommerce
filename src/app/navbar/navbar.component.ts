@@ -2,6 +2,7 @@ import { UserInterface } from '../models/user.interface';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { ShoppingCartService } from '../services/shopping-cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +13,8 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
   isShrunk = false;
   currentUser: UserInterface | null = null;
-  constructor(private auth: AuthService,private router: Router){}
+  shoppingCartQuantity: number = 0;
+  constructor(private auth: AuthService,private router: Router, private cartService: ShoppingCartService){}
 
   ngOnInit(): void {
      this.auth.appUser

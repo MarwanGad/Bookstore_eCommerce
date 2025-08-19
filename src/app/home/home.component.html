@@ -47,11 +47,12 @@
              *ngFor="let i of [0,1]; first as isFirstItem"
              [class.active]="isFirstItem">
           <div class="d-flex justify-content-center gap-5">
-            <product-card style="width: 18rem;" 
+            <product-card style="width: 13rem;" 
                           *ngFor="let book of (books$ | async)?.slice( i*4,(i+1)*4)"
                           [bookObj]="book"
                           [hideDescription]="true"
-                          [clickAble]="true">
+                          [clickAble]="true"
+                          [showIcons]="true">
             </product-card>
           </div>
         </div>  

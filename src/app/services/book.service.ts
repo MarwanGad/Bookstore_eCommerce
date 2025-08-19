@@ -16,10 +16,6 @@ export class BookService {
     return from(set(newBookRef,book));
   }
 
-  // getAllBooks(): Observable<bookInterface[]>{
-  //   const booksRef = ref(this.db,'books');
-  //   return listVal<bookInterface>(booksRef,{keyField: 'id'});
-  // }
 
   getAllBooks(): Observable<bookInterface[]> {
       const booksRef = ref(this.db, 'books');
