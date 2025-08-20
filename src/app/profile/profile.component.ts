@@ -1,4 +1,3 @@
-import { UserInterface } from './../models/user.interface';
 import { Component, inject, Injector, OnDestroy, OnInit, runInInjectionContext } from '@angular/core';
 import { Auth, user } from '@angular/fire/auth';
 import {  Subscription, switchMap } from 'rxjs';
@@ -28,7 +27,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
         })
       ).subscribe( user =>{
         this.currentUser = user;
-        console.log('from profile ts from getUser ' , this.currentUser);
       }))
     
     }

@@ -37,16 +37,13 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log('inside update quantity func');
     this.subscription = this.shoppingCart.getCart()
       .subscribe({
       next: (cartItems: cartItemInterface[]) => {
-        console.log('cartItems from service:', cartItems);
         const item = cartItems?.find( item => item.id == this.bookObj.id);
         this.itemQuantity = item?.quantity ? item.quantity : 0;
       },
-      error: err => console.error('getCart() error:', err),
-      complete: () => console.log('getCart() complete')
+      error: err => console.error('getCart() error:', err)
     });
   }
 

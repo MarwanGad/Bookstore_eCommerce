@@ -25,7 +25,6 @@ export class EditProfileComponent {
     this.subscription = runInInjectionContext(this.injector, () =>
       user(this.auth).subscribe(user => {
         this.currentUser = user;
-        console.log('from profile ts' , this.currentUser);
       })
     );
   }
@@ -38,7 +37,14 @@ export class EditProfileComponent {
 
 
   updateProfile(userToEdit: UserInterface){
-    this.userService.updateUser(userToEdit, this.currentUser.uid );
+    const updatedData = {
+      username: userToEdit.username ?? this.currentUser.displayName ?? ' ',
+      about: userToEdit.about ?? this.currentUser.about ?? ' ',
+      photoURL: userToEdit.photoURL ?? this.currentUser.photoURL ?? ' '
+    }
+
+    this.userService.updateUser( updatedData, this.currentUser.uid);
+
     this.router.navigate([`/account/profile/${this.currentUser.uid}`]);
 
   }

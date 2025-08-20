@@ -1,8 +1,8 @@
 export interface UserInterface {
-    email: string;
+    email?: string;
     username: string;
-    id: string;
-    isAdmin: boolean;
+    id?: string;
+    isAdmin?: boolean;
     photoURL: string;
     about: string;
 }

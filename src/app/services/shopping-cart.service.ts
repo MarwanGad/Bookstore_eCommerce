@@ -17,10 +17,8 @@ export class ShoppingCartService {
   
   async addToCart(bookToAdd: bookInterface){
     this.cartId = localStorage.getItem('cartId');
-    console.log('in add to cart ' , 'cartid: ' , this.cartId , 'booktoAdd ' , bookToAdd);
     if( !this.cartId ){
       this.cartId = this.createCartId();
-      console.log('in add to cart not found cart' , 'cartid: ' , this.cartId , 'booktoAdd ' , bookToAdd);
       localStorage.setItem('cartId',this.cartId);
     }
     

@@ -36,7 +36,6 @@ export class EditProductComponent {
       take(1)
     ).subscribe( book => {
       this.bookToEdit = book!;
-      console.log(this.bookToEdit);
     });
 
     this.genres$ = this.genre.getAllGenres();

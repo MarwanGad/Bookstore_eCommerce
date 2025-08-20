@@ -13,17 +13,17 @@ export class AuthService {
     this.currentUser = user(this.auth);
   }
 
-  register(email: string,username: string,password: string, profilePicUrl: string){
+  register(email: string,username: string,password: string, photoURL: string){
     const promise = createUserWithEmailAndPassword(this.auth,email,password)
       .then(response => {
         const userToAdd:any = {
           username: username,
           email: response.user.email,
           id: response.user.uid,
-          profilePicUrl: profilePicUrl,
+          photoURL: photoURL,
         };
         this.db.addUser(userToAdd);
-        updateProfile( response.user , { displayName: username, photoURL: profilePicUrl});
+        updateProfile( response.user , { displayName: username, photoURL: photoURL});
       })
       
       return from(promise);
