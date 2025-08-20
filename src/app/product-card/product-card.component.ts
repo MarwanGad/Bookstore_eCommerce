@@ -31,10 +31,6 @@ export class ProductCardComponent implements OnInit, OnDestroy {
 
   }
 
-  addToFavourite(event: Event, bookToAdd: bookInterface){
-    event.stopPropagation();
-    this.actionMessage = 'Added to Favourite';
-  }
 
   ngOnInit(): void {
     this.subscription = this.shoppingCart.getCart()
