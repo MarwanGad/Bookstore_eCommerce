@@ -3,4 +3,6 @@ export interface UserInterface {
     username: string;
     id: string;
     isAdmin: boolean;
+    photoURL: string;
+    about: string;
 }

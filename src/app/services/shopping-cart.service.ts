@@ -1,71 +1,65 @@
 import { cartItemInterface } from './../models/cartItem.interface';
 import { bookInterface } from './../models/book.interface';
 import { inject, Injectable, Injector, runInInjectionContext } from '@angular/core';
-import { Database, DatabaseReference, get, listVal, objectVal, push, ref, set, update } from '@angular/fire/database';
+import { Database, DatabaseReference, get, list, listVal, objectVal, push, ref, remove, set, update } from '@angular/fire/database';
 import { of, Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingCartService {
-
-  cartId: string | null = localStorage.getItem('cartId');
-
   private db = inject(Database);
   private injector = inject(Injector);
+
+  cartId: string | null= localStorage.getItem('cartId');
+  cartsRef = ref(this.db, 'carts');
+
   
   async addToCart(bookToAdd: bookInterface){
-    await this.getOrCreateCart();
-
-    const itemRef = ref(this.db, `carts/${this.cartId}/items/${bookToAdd.id}`);
-    const item = await this.getItem(itemRef,bookToAdd);
-    update(itemRef, { ...bookToAdd, quantity: ((item.val()?.quantity) || 0) + 1 });
-
-  }
-
-  private async getItem( itemRef: DatabaseReference, itemToGet?: bookInterface){
-    return await runInInjectionContext(this.injector, () => get(itemRef))
-  }
-
-  getQuantity(bookId: string){
-    const itemRef = ref(this.db,`carts/${this.cartId}/items/${bookId}`)
-    return runInInjectionContext(this.injector, () => 
-      objectVal<cartItemInterface>(itemRef)
-    ).pipe(
-      map((item: cartItemInterface) => item?.quantity ?? 0)
-    )
-  }
-
-  getAllItemsInCart(){
-     const cartsRef = ref(this.db, `carts/${this.cartId}/items`);
-      return runInInjectionContext(this.injector, () =>
-        listVal<cartItemInterface>(cartsRef)
-      );
-  }
-  
-  private async getOrCreateCart(){  
+    this.cartId = localStorage.getItem('cartId');
+    console.log('in add to cart ' , 'cartid: ' , this.cartId , 'booktoAdd ' , bookToAdd);
     if( !this.cartId ){
-      return await this.createCart();
+      this.cartId = this.createCartId();
+      console.log('in add to cart not found cart' , 'cartid: ' , this.cartId , 'booktoAdd ' , bookToAdd);
+      localStorage.setItem('cartId',this.cartId);
+    }
+    
+    const itemRef = ref(this.db, `carts/${this.cartId}/items/${bookToAdd.id}`);
+    const snapshot = await runInInjectionContext(this.injector, () => get(itemRef));
+    const itemValues: cartItemInterface = snapshot.exists() ? snapshot.val() : null;
+    
+    update(itemRef,{...bookToAdd, quantity: (itemValues?.quantity || 0) + 1 });
+  }
+
+  createCartId(): string{
+    const result = runInInjectionContext(this.injector, () => {
+      return push(this.cartsRef,{createdAt: new Date().getFullYear()})
+    }) 
+    return result.key;   
+  }
+
+  getCart() {
+    if(!this.cartId)
+      this.cartId = this.createCartId();
+      localStorage.setItem('cartId' , this.cartId);
+    const itemsRef = ref(this.db, `carts/${this.cartId}/items`);
+    return runInInjectionContext(this.injector, () => 
+      listVal<cartItemInterface>(itemsRef)   
+    );
+  }
+
+  async removeFromCart(bookToRemove: bookInterface){
+    const itemRef = ref(this.db, `carts/${this.cartId}/items/${bookToRemove.id}`);
+    const snapshot = await runInInjectionContext(this.injector, () => get(itemRef));
+    const itemValues: cartItemInterface = snapshot.exists() ? snapshot.val() : null;
+
+    if(itemValues.quantity > 1){
+      update(itemRef,{quantity: (itemValues?.quantity - 1) });
     }
     else{
-      return this.getCart();
+      remove(itemRef);
     }
-  }
 
-  private getCart(){
-    return ref(this.db, `carts/${this.cartId}`);
-  }
-
-
-  private async createCart(){
-    const cartsRef = ref(this.db,'carts');
-    const result = await push(cartsRef,{
-      createdAt: new Date().getFullYear()
-    })
-    if(result.key)
-      localStorage.setItem('cartId',result.key);
-      this.cartId = localStorage.getItem('cartId'); 
-      return ref(this.db,`carts/${this.cartId}`)    
   }
 
 }

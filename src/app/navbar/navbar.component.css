@@ -82,3 +82,9 @@
 .navbar-container.shrink .navbar-logo {
   max-height: 40px;
 }
+
+.badge{
+  color: #ae7036;
+  background-color: #211c13;
+  border-radius: 20px;
+}

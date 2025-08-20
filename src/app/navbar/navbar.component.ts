@@ -1,8 +1,11 @@
 import { UserInterface } from '../models/user.interface';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { ShoppingCartService } from '../services/shopping-cart.service';
+import { cartItemInterface } from '../models/cartItem.interface';
+import { combineLatest, startWith, Subscription, take } from 'rxjs';
+import { user } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-navbar',
@@ -10,28 +13,13 @@ import { ShoppingCartService } from '../services/shopping-cart.service';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy{
   isShrunk = false;
   currentUser: UserInterface | null = null;
-  shoppingCartQuantity: number = 0;
-  constructor(private auth: AuthService,private router: Router, private cartService: ShoppingCartService){}
-
-  ngOnInit(): void {
-     this.auth.appUser
-      .subscribe(userDoc => {
-        this.currentUser = userDoc;
-      })
-  }
-
-  logout(){
-    this.auth.logout()
-      .subscribe(response => {
-        console.log(response);
-        this.router.navigate(['/']);
-      })
-  }
-
-
+  cartItems: cartItemInterface[] | null = null;
+  subscription: Subscription | null = null;
+  cartQuantity: number = 0;
+  
   @HostListener('window:scroll', [])
   onWindowScroll() {
     const scrollY = window.scrollY || document.documentElement.scrollTop;
@@ -42,4 +30,38 @@ export class NavbarComponent implements OnInit {
       this.isShrunk = false;
     }
   }
+
+  constructor(private auth: AuthService,
+              private router: Router,
+              private cartService: ShoppingCartService){}
+
+  ngOnInit(): void {
+    this.subscription = combineLatest([
+      this.auth.appUser.pipe(startWith(null)),
+      this.cartService.getCart().pipe(startWith([]))
+    ]).
+    subscribe(([ userDoc, cartItems ]) => {
+      this.currentUser = userDoc;
+      this.cartQuantity = cartItems.reduce((sum, item) => sum + (item.quantity || 0), 0);
+
+    })
+
+  }
+
+  ngOnDestroy(): void {
+    if(this.subscription)
+      this.subscription.unsubscribe();
+
+  }
+
+
+  logout(){
+    this.auth.logout()
+      .subscribe(response => {
+        console.log(response);
+        this.router.navigate(['/']);
+      })
+  }
+
+
 }

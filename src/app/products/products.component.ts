@@ -4,6 +4,7 @@ import { BookService } from './../services/book.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { bookInterface } from '../models/book.interface';
 import { FilterInterface } from '../models/filter.interface';
+import { ShoppingCartService } from '../services/shopping-cart.service';
 
 @Component({
   selector: 'app-products',
@@ -15,12 +16,14 @@ export class ProductsComponent implements OnInit ,OnDestroy{
   books: bookInterface[] = [];
   filteredBooks: bookInterface[] = [];
   choosenGenre: string | null = null;
-  subscription: Subscription | null = null;
+  booksSubscription: Subscription | null = null;
 
-  constructor(private book: BookService,private route: ActivatedRoute){}
+  constructor(private book: BookService,
+              private route: ActivatedRoute,
+              private cartService: ShoppingCartService){}
   
-  ngOnInit(): void {
-    this.subscription = combineLatest([
+  async ngOnInit(){
+    this.booksSubscription = combineLatest([
       this.book.getAllBooks(),
       this.route.queryParamMap
     ]).subscribe(([books,params])=>{
@@ -29,12 +32,13 @@ export class ProductsComponent implements OnInit ,OnDestroy{
       this.filteredBooks = this.choosenGenre ?
         books.filter(book => book.genre.toLowerCase() === this.choosenGenre?.toLowerCase()) :
         books;
-    })  
+    })
+
   }
 
   ngOnDestroy(): void {
-    if(this.subscription)
-      this.subscription.unsubscribe();
+    if(this.booksSubscription)
+      this.booksSubscription.unsubscribe();
   }
 
   applyFilter(event: FilterInterface){

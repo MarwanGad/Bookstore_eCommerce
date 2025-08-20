@@ -1,5 +1,5 @@
 import { Injectable, inject, EnvironmentInjector, runInInjectionContext } from '@angular/core';
-import { Database, ref, set, object} from '@angular/fire/database';
+import { Database, ref, set, object, update} from '@angular/fire/database';
 import { from, map, Observable } from 'rxjs';
 import { UserInterface } from '../models/user.interface';
 
@@ -28,5 +28,10 @@ export class UserService {
         })
       )
     );
+  }
+
+  updateUser(UserToUpdate: UserInterface, UserId: string){
+    const userRef = ref(this.db, `users/${UserId}`);
+    update(userRef,UserToUpdate);
   }
 }

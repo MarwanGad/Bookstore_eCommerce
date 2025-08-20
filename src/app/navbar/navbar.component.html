@@ -2,16 +2,22 @@
   <div class="border-thick bg-black d-flex align-items-center justify-content-between p-4 mt-3">
 
   
-    <div class="d-flex align-items-center gap-1">
-      <a class="nav-link  tabs-font tabs-font-family" 
+    <div class="d-flex align-items-center  gap-2">
+      <a class="nav-link tabs-font tabs-font-family" 
          routerLink="/" 
          routerLinkActive="active-link"
          [routerLinkActiveOptions]="{exact:true}">Home</a>
-      <a class="nav-link  tabs-font tabs-font-family" 
+      <a class="nav-link tabs-font tabs-font-family" 
          routerLink="/products"
          routerLinkActive="active-link"
          [routerLinkActiveOptions]="{exact: true}"
-         [queryParamsHandling]="'merge'">Products</a>
+         [queryParamsHandling]="'merge'">Products</a>   
+      <a class="nav-link tabs-font tabs-font-family d-flex gap-1" 
+         routerLink="/shopping-cart"
+         routerLinkActive="active-link">
+         Cart
+         <span class="badge d-flex align-items-center ">{{cartQuantity}}</span>
+        </a>
     </div>
 
  
@@ -31,7 +37,7 @@
         {{ currentUser.username }}
         </a>
         <ul class="dropdown-menu" ngbDropdownMenu>
-          <li><a class="dropdown-item" routerLink="/account/profile">Profile</a></li>
+          <li><a class="dropdown-item" [routerLink]="['/account/profile',currentUser.id]">Profile</a></li>
           <li><a class="dropdown-item" routerLink="/account/my-orders">My Orders</a></li>
           <li><hr class="dropdown-divider"></li>
     

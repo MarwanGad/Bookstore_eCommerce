@@ -36,6 +36,7 @@ import { LottieComponent, provideLottieOptions } from 'ngx-lottie';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
 import player from 'lottie-web';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,9 @@ import player from 'lottie-web';
     TitlePipe,
     BookComponent,
     ProductFilterComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    EditProfileComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -68,11 +71,12 @@ import player from 'lottie-web';
       { path: 'products' , component: ProductsComponent},
       { path: 'login' , component: LoginComponent},
       { path: 'register' , component: RegisterComponent},
-      { path: 'shopping-cart' , component: ShoppingCartComponent, canActivate: [AuthGaurd]},
-      { path: 'check-out' , component: CheckOutComponent,  canActivate: [AuthGaurd]},
+      { path: 'shopping-cart' , component: ShoppingCartComponent},
+      { path: 'check-out' , component: CheckOutComponent},
       { path: 'order-success' , component: OrderSuccessComponent,  canActivate: [AuthGaurd]},
       { path: 'account/my-orders' , component: MyOrdersComponent,  canActivate: [AuthGaurd]},
-      { path: 'account/profile' , component: ProfileComponent,  canActivate: [AuthGaurd]},
+      { path: 'account/profile/:id' , component: ProfileComponent,  canActivate: [AuthGaurd]},
+      { path: 'account/profile/edit/:id' , component: EditProfileComponent, canActivate: [AuthGaurd]},
       { path: 'admin/products/new' , component: NewProductComponent,  canActivate: [AuthGaurd,AdminAuthGaurdService]},
       { path: 'admin/products/:id' , component: EditProductComponent,  canActivate: [AuthGaurd,AdminAuthGaurdService]},
       { path: 'admin/products' , component: AdminProductsComponent,  canActivate: [AuthGaurd,AdminAuthGaurdService]},

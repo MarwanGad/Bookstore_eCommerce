@@ -3,6 +3,7 @@ import { bookInterface } from './../models/book.interface';
 import { BookService } from './../services/book.service';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ShoppingCartService } from '../services/shopping-cart.service';
 
 @Component({
   selector: 'app-book',
@@ -13,8 +14,15 @@ import { ActivatedRoute } from '@angular/router';
 export class BookComponent {
   book$: Observable<bookInterface>;
   
-  constructor(private book:BookService, private route: ActivatedRoute){
+  constructor(private book:BookService,
+              private route: ActivatedRoute, 
+              private cartService: ShoppingCartService){
+
     const bookId= this.route.snapshot.paramMap.get('id');
     this.book$  = this.book.getBook(bookId);
+  }
+
+  addItem(bookToAdd: bookInterface){
+    this.cartService.addToCart(bookToAdd);
   }
 }
