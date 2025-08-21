@@ -51,7 +51,7 @@
         </div>
       </div>
 
-      <div class="col-12 col-lg-4 sticky-top">
+      <div class="col-12 col-lg-4" *ngIf="cartItems?.length">
         <div class="card shadow-2-strong mb-5 mb-lg-0">
           <div class="card-body p-4">
             <div class="d-flex justify-content-between">
@@ -67,16 +67,285 @@
               <p class="mb-2 tabs-font tabs-font-family">Total</p>
               <p class="mb-2 tabs-font-family">{{totalPrice + 50 | currency:'EGP'}}</p>
             </div>
-            <button routerLink="/check-out" type="button" class="btn btn-primary w-100">
-              <div class="d-flex justify-content-between">
-                <span class="tabs-font-family">Checkout</span>
-                <span>{{totalPrice + 50 | currency:'EGP'}}</span>
+            <hr class="my-4">
+            <ul class="nav nav-tabs d-flex justify-content-center" id="myTab" role="tablist">
+              <li class="nav-item " role="presentation">
+                <button class="nav-link active tabs-font tabs-font-family" id="shipping-tab" data-bs-toggle="tab" data-bs-target="#shipping-tab-pane" type="button" role="tab" aria-controls="shipping-tab-pane" aria-selected="true">Shipping</button>
+              </li>
+              <li class="nav-item"  role="presentation">
+                <button class="nav-link  tabs-font tabs-font-family" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment-tab-pane" type="button" role="tab" aria-controls="payment-tab-pane" aria-selected="false">Payment</button>
+              </li>
+              <li class="nav-item "  role="presentation">
+                <button class="nav-link   tabs-font tabs-font-family" id="checkout-tab" data-bs-toggle="tab" data-bs-target="#checkout-tab-pane" type="button" role="tab" aria-controls="checkout-tab-pane" aria-selected="false">Checkout</button>
+              </li>
+          </ul>
+          <form #order="ngForm" (ngSubmit)="placeOrder(order.value)" class="tab-content mt-3" id="myTabContent">
+            <div class="tab-pane fade show active" id="shipping-tab-pane" role="tabpanel" aria-labelledby="shipping-tab" tabindex="0">
+              <div class="col-md-8 order-md-1">
+                <h4 class="mb-3 tabs-font tabs-font-family ">Billing address</h4>
+
+                  <div class="">
+                    <div class=" form-group tabs-font tabs-font-family">
+                      <label for="name">Full Name</label>
+                      <input type="text" 
+                             class="form-control"
+                             ngModel
+                             #fullName="ngModel"
+                             required
+                             pattern="^[A-Za-z]+(?:[ '-][A-Za-z]+)+$"
+                             name="fullName" 
+                             id="name" 
+                             placeholder="Klaus Mikealson">
+                    </div>
+                    <div class="alert alert-danger" *ngIf="fullName.touched && fullName.invalid">
+                        <div *ngIf="fullName.errors?.['required']">
+                          Full Name is required.
+                        </div>
+                        <div *ngIf="fullName.errors?.['pattern']">
+                          
+                          Follow "FirstName LastName" format.
+
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class=" tabs-font tabs-font-family from-group">
+                    <label for="address">Address</label>
+                    <input type="text" 
+                           class="form-control"
+                           ngModel
+                           #address="ngModel"
+                           required
+                           name="address" 
+                           id="address" 
+                           placeholder="1234 Main St">
+                  </div>
+                  <div class="alert alert-danger" *ngIf="address.touched && address.invalid">
+                    Address is required.
+                  </div>
+                  <div class="d-flex flex-column gap-2">
+                    <div class=" form-group tabs-font tabs-font-family">
+                      <label for="country">Country</label>
+                      <input type="text" 
+                             class="form-control"
+                             ngModel
+                             #country="ngModel"
+                             name="country"
+                             required
+                             name="country"
+                             id="country"
+                             placeholder="Maldives">
+                    </div>
+                    <div class="alert alert-danger" *ngIf="country.touched && country.invalid">
+                      Country is required.
+                    </div>
+                    <div class=" form-group tabs-font tabs-font-family">
+                      <label for="state">State</label>
+                      <input type="text" 
+                      class="form-control"
+                      ngModel
+                      #state="ngModel"
+                      name="state"
+                      required
+                      name="state"
+                      id="state"
+                      placeholder="South Asia">
+                    </div>
+                    <div class="alert alert-danger" *ngIf="state.touched && state.invalid">
+                      State is required.
+                    </div>
+                  </div>
+
               </div>
-            </button>
+            </div>
+            <div class="tab-pane fade " id="payment-tab-pane" role="tabpanel" aria-labelledby="payment-tab" tabindex="0">
+              
+              <div class="d-flex flex-column gap-5">
+
+                <div class="payment-method">
+
+                    <div class="d-flex flex-row pb-3">
+
+                      <div class="d-flex align-items-center pe-2">
+
+                        <input class="form-check-input" 
+                                type="radio"
+                                ngModel 
+                                name="payment-method" 
+                                id="creditCard"
+                                value="creditCard"  
+                                checked />
+
+                      </div>
+
+                      <div class="rounded border w-100 p-3 tabs-font tabs-font-family">
+                        <p class="d-flex align-items-center mb-0">
+                          <i class="fab fa-cc-mastercard fa-2x text-body pe-2"></i>Credit
+                          Card
+                        </p>
+                      </div>
+
+                    </div>
+
+                    <div class="d-flex flex-row pb-3">
+
+                      <div class="d-flex align-items-center pe-2">
+                        <input class="form-check-input" 
+                               type="radio"
+                               ngModel 
+                               name="payment-method" 
+                               id="debitCard"
+                               value="debitCard"/>
+                      </div>
+
+                      <div class="rounded border w-100 p-3 tabs-font tabs-font-family">
+                        <p class="d-flex align-items-center mb-0">
+                          <i class="fab fa-cc-visa fa-2x fa-lg text-body pe-2"></i>Debit Card
+                        </p>
+                      </div>
+
+                    </div>
+
+                    <div class="d-flex flex-row">
+
+                      <div class="d-flex align-items-center pe-2">
+                        <input class="form-check-input" 
+                               type="radio"
+                               ngModel 
+                               name="payment-method" 
+                               id="payPal"
+                               value="payPal">
+                      </div>
+
+                      <div class="rounded border w-100 p-3 tabs-font tabs-font-family">
+                        <p class="d-flex align-items-center mb-0">
+                          <i class="fab fa-cc-paypal fa-2x fa-lg text-body pe-2"></i>PayPal
+                        </p>
+                      </div>
+
+                    </div>
+
+                </div>
+
+                <div class="card-details tabs-font tabs-font-family d-flex flex-column">
+                      <div class=" form-group form-outline">
+                        <input type="text" 
+                               id="cardName"
+                               ngModel
+                               required
+                               #cardName="ngModel"
+                               name="cardName" 
+                               class="form-control form-control-lg" 
+                               placeholder="Klaus Mikealson" />
+                        <label class="form-label" for="cardName">Name on card</label>
+                        <div class="alert alert-danger" *ngIf="cardName.touched && cardName.invalid">
+                          Name is required
+                        </div>
+                      </div>
+
+                      <div class="form-group form-outline">
+                        <input type="text" 
+                               id="typeExp"
+                               ngModel
+                               required
+                               pattern="^(0[1-9]|1[0-2])\/\d{2}$"
+                               #exp="ngModel"
+                               name="exp" 
+                               class="form-control form-control-lg" 
+                               placeholder="MM/YY"
+                               size="7" 
+                               id="exp"/>
+                        <label class="form-label" for="typeExp">Expiration</label>
+                        <div class="alert alert-danger" *ngIf="exp.touched && exp.invalid">
+                          <div *ngIf="exp.errors?.['required']">Expiration date is required.</div>
+                          <div *ngIf="exp.errors?.['pattern']">Use MM/YY format. exp:02/23</div>
+                        </div>
+                      </div>
+
+                      <div  class="form-group form-outline">
+                        <input type="text" 
+                               id="cardNumber"
+                               ngModel
+                               required
+                               pattern="^(\d{4}\s){3}\d{4}$"
+                               #cardNumber="ngModel"
+                               name="cardNumber" 
+                               class="form-control form-control-lg" 
+                               size="17"
+                               placeholder="1111 2222 3333 4444"/>
+                        <label class="form-label" for="typeText">Card Number</label>
+                        <div class="alert alert-danger" *ngIf="cardNumber.touched && cardNumber.invalid">
+                          <div *ngIf="cardNumber.errors?.['required']">
+                            Crad Number is required.
+                          </div>
+                          <div *ngIf="cardNumber.errors?.['pattern']">
+                            Invalid format, must be xxxx xxxx xxxx xxxx
+                          </div>
+
+                        </div>
+                      </div>
+
+                      <div  class=" from-group form-outline">
+                        <input type="password" 
+                                id="cvv"
+                                ngModel
+                                required
+                                maxlength="3"
+                                minlength="3"
+                                #cvv="ngModel"
+                                name="cvv" 
+                                class="form-control form-control-lg"
+                                size="1"/>
+                        <label class="form-label" for="typeText">Cvv</label>
+                        <div class="alert alert-danger" *ngIf="cvv.touched && cvv.invalid">
+                          <div *ngIf="cvv.errors?.['required']">
+                            Cvv is required.
+                          </div>
+                          <div *ngIf="cvv.errors?.['minlength']">
+                            Cvv must be 3 digits
+
+                          </div>
+                        </div>
+                      </div>
+
+                </div>   
+
+              </div>
+
+            </div>
+            <div class="tab-pane fade  " id="checkout-tab-pane" role="tabpanel" aria-labelledby="checkout-tab" tabindex="0">
+              <div class="summary">
+                <h4 class="tabs-font tabs-font-family text-center">Summary</h4>
+                <ul class="list-group  tabs-font-family">
+                  <li class="list-group-item tabs-font d-flex justify-content-between" *ngFor="let item of cartItems">
+                    <span>{{item.title}}</span>
+                    <span class="text-dark">x {{item.quantity}}</span>
+                  </li>
+                </ul>
+              </div>
+              <button [disabled]="order.invalid" type="submit" class="btn mt-4 w-100">
+                <div class="d-flex justify-content-center">
+                  <span class="tabs-font-family ">Place Order</span>
+                </div>
+              </button>
+              <div class=" p-3" style="z-index: 1200;">
+                  <ngb-toast
+                  *ngIf="errorMessage"
+                  [autohide]="true"
+                  [delay]="3000"
+                  class="bg-danger text-white shadow"
+                  (hidden)="errorMessage = null">
+                  {{ errorMessage }}
+                  </ngb-toast>
+              </div>
+
+            </div>
+          </form>
+
           </div>
         </div>
       </div>
-
+      
     </div>
   </div>
 </section>

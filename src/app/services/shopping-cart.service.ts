@@ -60,4 +60,9 @@ export class ShoppingCartService {
 
   }
 
+  removeCartItems(){
+    const cartToRemoveRef = ref(this.db, `carts/${this.cartId}/items`);
+    remove(cartToRemoveRef);
+  }
+
 }

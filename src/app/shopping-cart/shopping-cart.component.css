@@ -10,14 +10,14 @@
 }
 
 
-.btn{
+/* .btn{
     background-color: #cf9e65;
     border: none;
 }
 
 .btn:hover{
     background-color: #977248;
-}
+} */
 
 
 .card{
@@ -31,6 +31,29 @@ input[type="number"].form-control {
   width: 50px;
 }
 
-.sticky-top{
-    top: 150px;
+
+
+.btn {
+  background-color: #cf9e65; 
+  border-bottom: none;
+  transition: background-color 0.3s ease;
 }
+
+.btn:hover {
+  background-color: #977248 !important;
+}
+
+
+.nav-item .nav-link {
+  color: #977248;
+  transition: color 0.3s ease;
+
+}
+
+.nav-item .nav-link:hover,
+.nav-item .nav-link.active {
+  color: #cf9e65;
+}
+
+
+

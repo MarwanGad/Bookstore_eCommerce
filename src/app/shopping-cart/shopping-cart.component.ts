@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { cartItemInterface } from '../models/cartItem.interface';
 import { bookInterface } from '../models/book.interface';
+import { OrderService } from '../services/order.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -12,25 +13,25 @@ import { bookInterface } from '../models/book.interface';
   styleUrl: './shopping-cart.component.css'
 })
 export class ShoppingCartComponent implements OnInit, OnDestroy{
-
+  errorMessage: string | null = null;
   cartItems: cartItemInterface[] | null = [];
-  subscription: Subscription | null = null;
+  cartSubscription: Subscription | null = null;
+  orderSubscription: Subscription | null = null;
   totalPrice: number = 0;
 
-  constructor(private router: Router, private cartService: ShoppingCartService){}
+  constructor(private router: Router, 
+              private cartService: ShoppingCartService,
+              private orderService: OrderService){}
 
   ngOnInit(): void {
-    this.subscription = this.cartService.getCart()
+    this.cartSubscription = this.cartService.getCart()
       .subscribe( cartItems =>{
         this.cartItems = cartItems;
         this.totalPrice = cartItems.reduce( (sum,item) => sum + ( (item.price * item.quantity) | 0),0)
       })
   }
 
-  ngOnDestroy(): void {
-    if(this.subscription)
-      this.subscription.unsubscribe();
-  }
+
 
   incrementItem(itemToIncrement: bookInterface){
     this.cartService.addToCart(itemToIncrement);
@@ -42,5 +43,30 @@ export class ShoppingCartComponent implements OnInit, OnDestroy{
 
   }
 
+  placeOrder(orderDetails: any){
+    const newOrder = {
+      items: this.cartItems,
+      orderDetails
+    } 
+       
+    this.orderSubscription = this.orderService.storeOrder(newOrder)
+      .subscribe({
+        next: (something) => {
+          console.log(something);
+          this.router.navigate(['/order-success']);
+        },
+        error: (error) => {
+          this.errorMessage = error.message;
+        }
+      })
+  }
+
+
+  ngOnDestroy(): void {
+    if(this.cartSubscription)
+      this.cartSubscription.unsubscribe();
+    if(this.orderSubscription)
+      this.orderSubscription.unsubscribe();
+  }
 
 }
