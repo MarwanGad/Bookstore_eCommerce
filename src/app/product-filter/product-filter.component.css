@@ -27,5 +27,9 @@
 }
 
 .sticky-top{
-  top: 100px;
+  top: 150px;
+}
+
+.overlap {
+  z-index: 1;
 }

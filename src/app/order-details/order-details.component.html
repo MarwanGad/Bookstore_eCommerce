@@ -1,0 +1,58 @@
+<section style="background-color: #eee;" *ngIf="order; else loading">
+  <div class="container py-5">
+    <div class="card">
+      <div class="card-body d-flex justify-content-between flex-wrap">
+
+        <div class="flex-fill me-4" style="min-width: 250px;">
+          <div class="mb-3">
+            <p class="fw-bold  tabs-font-family">Placed By</p>
+            <p class=" tabs-font tabs-font-family">{{ order?.orderDetails?.fullName }}</p>
+          </div>
+          <div class="mb-3">
+            <p class="fw-bold tabs-font-family">Date of Creation</p>
+            <p class=" tabs-font tabs-font-family">{{ order?.createdOn }}</p>
+          </div>
+          <div class="mb-3">
+            <p class=" fw-bold tabs-font-family">Items</p>
+            <div class="">
+                <ul class="list-group">
+                    <li class=" tabs-font tabs-font-family d-flex gap-5"  *ngFor="let item of order?.items">
+                        <span>{{item?.title}}</span>
+                        <span class="text-dark">{{item?.price | currency:'EGP'}} x {{item?.quantity}}</span>
+                    </li>
+                </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex-fill" style="min-width: 250px;">
+          <div class="mb-3">
+            <p class=" fw-bold tabs-font-family">Total Price</p>
+            <p class="tabs-font tabs-font-family">{{order?.totalPrice | currency:'EGP'}}</p>
+          </div>
+          <div class="mb-3">
+            <p class="fw-bold tabs-font-family">Address</p>
+            <p class="tabs-font tabs-font-family">{{ order?.orderDetails?.address }}</p>
+          </div>
+          <div class="mb-3">
+            <p class="fw-bold tabs-font-family">Country</p>
+            <p class="tabs-font tabs-font-family">{{ order?.orderDetails?.country }}</p>
+          </div>
+          <div class="mb-3">
+            <p class="fw-bold tabs-font-family">State</p>
+            <p class="tabs-font tabs-font-family">{{ order?.orderDetails?.state }}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #loading>
+  <div class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</ng-template>

@@ -20,7 +20,6 @@ export class AdminAuthGaurdService  {
       .pipe(
         switchMap( user => this.user.getUser(user!.uid)),
         map(userDoc => {
-          console.log(userDoc);
           if(userDoc?.isAdmin)
             return true;
           this.router.navigate(['/']);

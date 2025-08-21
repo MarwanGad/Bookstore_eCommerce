@@ -1,0 +1,26 @@
+.btn{
+    background-color: #cf9e65;
+    border: none;
+}
+
+.btn:hover{
+    background-color: #977248;
+}
+
+.table tbody tr {
+  border-bottom: 2px solid #aa6c33; 
+}
+
+table thead.custom-thead {
+  --bs-table-bg: #343a40 !important;
+  --bs-table-color: #ae7036 !important;
+  font-family: "Tiro Devanagari Sanskrit", serif;
+
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.custom-field{
+    border: 2px #343a40 solid;
+    max-width: 20% !important;
+    height: fit-content;
+}

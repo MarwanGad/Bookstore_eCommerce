@@ -88,3 +88,7 @@
   background-color: #211c13;
   border-radius: 20px;
 }
+
+.dropdown-menu {
+  z-index: 1050 !important;
+}

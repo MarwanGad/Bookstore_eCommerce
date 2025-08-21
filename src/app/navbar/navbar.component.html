@@ -38,7 +38,8 @@
         </a>
         <ul class="dropdown-menu" ngbDropdownMenu>
           <li><a class="dropdown-item" [routerLink]="['/account/profile',currentUser.id]">Profile</a></li>
-          <!-- <li><a class="dropdown-item" routerLink="/account/my-orders">My Orders</a></li> -->
+          <li><a class="dropdown-item" routerLink="/account/my-orders">My Orders</a></li>
+          <li><hr class="dropdown-divider"></li>
     
           <li><a class="dropdown-item" routerLink="/admin/orders" *ngIf="currentUser.isAdmin">Manage Orders</a></li>
           <li><a class="dropdown-item" routerLink="/admin/products" *ngIf="currentUser.isAdmin" >Manage Products</a></li>

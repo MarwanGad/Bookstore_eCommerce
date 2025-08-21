@@ -1,1 +1,24 @@
-<p>admin-users works!</p>
+<div class="d-flex justify-content-center align-items-center m-5">
+  <table class=" table table-hover  ">
+    <thead class="custom-thead">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">User</th>
+        <th scope="col">Email</th>
+        <th scope="col">Admin</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{user?.username}}</td>
+        <td>{{user?.email}}</td>
+        <td>{{user?.isAdmin ? 'Yes' : 'No'}}</td>
+        <td>
+            <button class="btn tabs-font-family " (click)="changeAdmin(user)"  >Change Admin Access</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

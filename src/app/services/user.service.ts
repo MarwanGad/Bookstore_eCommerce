@@ -1,5 +1,5 @@
 import { Injectable, inject, EnvironmentInjector, runInInjectionContext } from '@angular/core';
-import { Database, ref, set, object, update} from '@angular/fire/database';
+import { Database, ref, set, object, update, listVal} from '@angular/fire/database';
 import { from, map, Observable } from 'rxjs';
 import { UserInterface } from '../models/user.interface';
 import { Auth, updateEmail, updateProfile} from '@angular/fire/auth';
@@ -30,13 +30,23 @@ export class UserService {
     );
   }
 
-  updateUser(UserToUpdate: UserInterface, UserId: string){
+  updateUser(UserToUpdate: UserInterface, userId: string){
     const currentUser = this.auth.currentUser;
     if (!currentUser) throw new Error('No authenticated user');
 
-    const userRef = ref(this.db, `users/${UserId}`);
+    const userRef = ref(this.db, `users/${userId}`);
     updateProfile( currentUser , { displayName: UserToUpdate.username, photoURL: UserToUpdate.photoURL});
 
     update(userRef,UserToUpdate);
+  }
+
+  getAllUsers(): Observable<UserInterface[]>{
+    const usersRef = ref(this.db,'users');
+    return runInInjectionContext(this.injector, () => listVal(usersRef));
+  }
+
+  changeAdminRole(user: UserInterface){
+    const userRef = ref(this.db, `users/${user.id}`);
+    update(userRef, { isAdmin: !user.isAdmin});
   }
 }

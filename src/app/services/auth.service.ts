@@ -21,6 +21,7 @@ export class AuthService {
           email: response.user.email,
           id: response.user.uid,
           photoURL: photoURL,
+          isAdmin: false
         };
         this.db.addUser(userToAdd);
         updateProfile( response.user , { displayName: username, photoURL: photoURL});

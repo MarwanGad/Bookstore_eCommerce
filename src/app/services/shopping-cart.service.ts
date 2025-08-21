@@ -3,6 +3,7 @@ import { bookInterface } from './../models/book.interface';
 import { inject, Injectable, Injector, runInInjectionContext } from '@angular/core';
 import { Database, DatabaseReference, get, list, listVal, objectVal, push, ref, remove, set, update } from '@angular/fire/database';
 import { of, Observable, map } from 'rxjs';
+import { serverTimestamp } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class ShoppingCartService {
 
   createCartId(): string{
     const result = runInInjectionContext(this.injector, () => {
-      return push(this.cartsRef,{createdAt: new Date().getFullYear()})
+      return push(this.cartsRef,{createdAt: serverTimestamp()})
     }) 
     return result.key;   
   }

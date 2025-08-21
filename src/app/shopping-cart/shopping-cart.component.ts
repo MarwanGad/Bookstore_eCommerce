@@ -46,7 +46,8 @@ export class ShoppingCartComponent implements OnInit, OnDestroy{
   placeOrder(orderDetails: any){
     const newOrder = {
       items: this.cartItems,
-      orderDetails
+      orderDetails,
+      totalPrice: this.totalPrice
     } 
        
     this.orderSubscription = this.orderService.storeOrder(newOrder)
