@@ -1,7 +1,7 @@
 <div class=" overlap sticky-top">
     <p class="text-center ">Filter By</p>
-    <form #f="ngForm" class="tabs-font">
-        <div class="form-check form-check-inline" *ngFor="let option of ['genre','title','author','price']">
+    <form #f="ngForm" class="tabs-font d-flex justify-content-center">
+        <div class="form-check form-check-inline" *ngFor="let option of ['genre','title','author']">
         <input class="form-check-input"
                 ngModel
                 type="radio"

@@ -21,7 +21,6 @@ export class ProductFilterComponent {
 
   filter(value: string,option: any){
     this.filterChange.emit({value: value, type: option})
-    console.log(value);
   }
 
   filterChanged(option:any){

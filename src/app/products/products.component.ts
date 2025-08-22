@@ -54,6 +54,5 @@ export class ProductsComponent implements OnInit ,OnDestroy{
           this.books;
         break;
     }
-    console.log(event);
   }
 }

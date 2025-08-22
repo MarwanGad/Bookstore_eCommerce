@@ -31,7 +31,7 @@ export class RegisterComponent {
           this.router.navigate(['/'])
         },
         error: (err) => {
-          this.errorMessage = err.message.replace(/^Firebase:\s*/i, '');
+          this.errorMessage = err.message.replace('Firebase:', '');
         }
       })
 

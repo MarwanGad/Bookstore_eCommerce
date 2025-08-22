@@ -1,24 +1,32 @@
 <div class="container-fluid p-0">
   <picture>
-    <img src="/products.png" class="w-100" style="min-height: 100px; max-height:300px ; object-fit:cover; object-position:center;" alt="Products Banner">
+    <img src="/products.png" class="w-100" style="min-height: 100px; max-height:300px; object-fit:cover; object-position:center;" alt="Products Banner">
   </picture>
 </div>
 
-<div class="d-flex container mt-5 gap-3" >
-  <div class="col-3">
-    <product-filter (filterChange)="applyFilter($event)" [path]="'/products'">
-    </product-filter>
-  </div>
+<div class="container mt-5">
+  <div class="row gy-4 gx-5">
+    <div class="col-12 col-md-3">
+      <product-filter 
+        (filterChange)="applyFilter($event)" 
+        [path]="'/products'">
+      </product-filter>
+    </div>
 
-  <div class="container-fluid">
-    <div class="row gy-4 gx-5">
-      <div class="col-12 col-md-3" *ngFor="let book of filteredBooks">
-        <product-card [bookObj]="book"
-                      [hideDescription]="true" 
-                      [clickAble]="true"
-                      [showIcons]="true">
-                    </product-card>
+
+    <div class="col-12 col-md-8">
+      <div class="row gy-4 gx-5">
+        <div class="col-12 col-sm-6 col-md-3" *ngFor="let book of filteredBooks">
+          <product-card 
+            [bookObj]="book"
+            [hideDescription]="true"
+            [clickAble]="true"
+            [showIcons]="true">
+          </product-card>
+        </div>
       </div>
     </div>
+
+
   </div>
 </div>

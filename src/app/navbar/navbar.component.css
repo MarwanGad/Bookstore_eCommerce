@@ -75,7 +75,7 @@
   transition: max-height 0.3s ease;
 }
 
-.navbar-container.shrink {
+.navbar-container.shrink{
   height: 80px;
 }
 
@@ -91,4 +91,14 @@
 
 .dropdown-menu {
   z-index: 1050 !important;
+}
+
+.navbar-toggler{
+  background-color:#ae7036 !important;
+  transition: all 0.3s ease;
+}
+
+.navbar-toggler.shrink{
+  position: absolute;
+  height: 40px;
 }

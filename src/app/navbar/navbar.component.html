@@ -1,65 +1,78 @@
-<div class="bg-color navbar-container sticky-top"  [class.shrink]="isShrunk" style="  display: flex; align-items: center; justify-content: center;">
-  <div class="border-thick bg-black d-flex align-items-center justify-content-between p-4 mt-3">
+<nav class="navbar bg-color navbar-container navbar-expand-md sticky-top" [class.shrink]="isShrunk"  style="  display: flex; align-items: center; justify-content: center;">
+  <div class="container-fluid border-thick bg-black d-flex justify-content-between  p-4 mt-3">
 
-  
-    <div class="d-flex align-items-center  gap-2">
-      <a class="nav-link tabs-font tabs-font-family" 
-         routerLink="/" 
-         routerLinkActive="active-link"
-         [routerLinkActiveOptions]="{exact:true}">Home</a>
-      <a class="nav-link tabs-font tabs-font-family" 
-         routerLink="/products"
-         routerLinkActive="active-link"
-         [routerLinkActiveOptions]="{exact: true}"
-         [queryParamsHandling]="'merge'">Products</a>   
-      <a class="nav-link tabs-font tabs-font-family d-flex gap-1" 
-         routerLink="/shopping-cart"
-         routerLinkActive="active-link">
-         Cart
-         <span class="badge d-flex align-items-center ">{{cartQuantity}}</span>
-        </a>
+    <div class="d-none d-md-flex align-items-center gap-3 ms-5">
+      <a class="nav-link tabs-font tabs-font-family" routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">Home</a>
+      <a class="nav-link tabs-font tabs-font-family" routerLink="/products" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" [queryParamsHandling]="'merge'">Products</a>
+      <a class="nav-link tabs-font tabs-font-family d-flex gap-1" routerLink="/shopping-cart" routerLinkActive="active-link">
+        Cart <span class="badge d-flex align-items-center">{{cartQuantity}}</span>
+      </a>
     </div>
 
- 
-    <a class="brand-name" routerLink="/">
-      <img class="navbar-logo sticky-top" src="/mysticFallsLogo.png" alt="Mystic Falls Bookstore">
+    <a class="navbar-brand position-absolute top-50 start-50 translate-middle mt-2" routerLink="/">
+      <img class="navbar-logo" src="/mysticFallsLogo.png" alt="Mystic Falls Bookstore">
     </a>
 
-    
-    <div class="d-flex align-items-center gap-1 account-style"  style="min-width: 150px; justify-content: flex-end;">
-      <div class="nav-item dropdown ms-auto" ngbDropdown *ngIf="currentUser; else guest">
-        <a class="nav-link dropdown-toggle tabs-font-family" 
-        style="color: #ae7036;" 
-        data-bs-toggle="dropdown" 
-        role="button" 
-        aria-expanded="false" 
-        ngbDropdownToggle>
-        {{ currentUser.username }}
+    <div class="d-none d-sm-flex me-5" >
+      <div class="nav-item dropdown" ngbDropdown *ngIf="currentUser; else guest">
+        <a class="nav-link dropdown-toggle tabs-font-family d-none d-md-flex align-items-center " style="color: #ae7036; cursor: pointer;" ngbDropdownToggle>
+          {{ currentUser.username }}
         </a>
         <ul class="dropdown-menu" ngbDropdownMenu>
           <li><a class="dropdown-item" [routerLink]="['/account/profile',currentUser.id]">Profile</a></li>
           <li><a class="dropdown-item" routerLink="/account/my-orders">My Orders</a></li>
           <li><hr class="dropdown-divider"></li>
-    
-          <li><a class="dropdown-item" routerLink="/admin/orders" *ngIf="currentUser.isAdmin">Manage Orders</a></li>
-          <li><a class="dropdown-item" routerLink="/admin/products" *ngIf="currentUser.isAdmin" >Manage Products</a></li>
-          <li><a class="dropdown-item" routerLink="/admin/users" *ngIf="currentUser.isAdmin">Manage Users</a></li>
-      
+          <li *ngIf="currentUser.isAdmin"><a class="dropdown-item" routerLink="/admin/orders">Manage Orders</a></li>
+          <li *ngIf="currentUser.isAdmin"><a class="dropdown-item" routerLink="/admin/products">Manage Products</a></li>
+          <li *ngIf="currentUser.isAdmin"><a class="dropdown-item" routerLink="/admin/users">Manage Users</a></li>
           <li><hr class="dropdown-divider"></li>
-          <li><a (click)="logout()" class="dropdown-item" style="cursor: pointer;" >Logout</a></li>
+          <li><a (click)="logout()" class="dropdown-item" style="cursor: pointer;">Logout</a></li>
         </ul>
       </div>
       <ng-template #guest>
-        <div class="d-flex gap-1">
-          <a class="nav-link  tabs-font tabs-font-family" 
-             routerLink="/login"
-             routerLinkActive="active-link">Login</a>
-          <a class="nav-link  tabs-font tabs-font-family" 
-             routerLink="/register"
-             routerLinkActive="active-link">Register</a>
+        <div class="d-flex gap-2">
+          <a class="nav-link tabs-font tabs-font-family" routerLink="/login" routerLinkActive="active-link">Login</a>
+          <a class="nav-link tabs-font tabs-font-family" routerLink="/register" routerLinkActive="active-link">Register</a>
         </div>
       </ng-template>
     </div>
 
+    <button class="navbar-toggler ms-2 d-sm-none"
+            [class.shrink]="isShrunk" 
+            type="button" 
+            data-bs-toggle="offcanvas" 
+            data-bs-target="#offcanvasNavbar" 
+            aria-controls="offcanvasNavbar" 
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon "></span>
+    </button>
+
+    <div class="offcanvas offcanvas-end text-bg-dark d-sm-none" tabindex="-1" id="offcanvasNavbar">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Menu</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">Home</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/products" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" [queryParamsHandling]="'merge'">Products</a></li>
+          <li class="nav-item"><a class="nav-link d-flex align-items-center" routerLink="/shopping-cart" routerLinkActive="active-link">Cart <span class="badge ms-1">{{cartQuantity}}</span></a></li>
+        </ul>
+        <hr>
+        <div class="d-flex flex-column gap-3 " *ngIf="currentUser; else mobileGuest">
+          <a class="nav-link fw-bold mb-2" style="color:#ae7036;">{{currentUser.username}}</a>
+          <a class="nav-link" [routerLink]="['/account/profile',currentUser.id]">Profile</a>
+          <a class="nav-link" routerLink="/account/my-orders">My Orders</a>
+          <a class="nav-link" *ngIf="currentUser.isAdmin" routerLink="/admin/orders">Manage Orders</a>
+          <a class="nav-link" *ngIf="currentUser.isAdmin" routerLink="/admin/products">Manage Products</a>
+          <a class="nav-link" *ngIf="currentUser.isAdmin" routerLink="/admin/users">Manage Users</a>
+          <a class="nav-link text-danger mt-2" style="cursor:pointer;" (click)="logout()">Logout</a>
+        </div>
+        <ng-template #mobileGuest>
+          <a class="nav-link" routerLink="/login">Login</a>
+          <a class="nav-link" routerLink="/register">Register</a>
+        </ng-template>
+      </div>
+    </div>
   </div>
-</div>
+</nav>
