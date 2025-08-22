@@ -44,7 +44,7 @@
       <div id="newReleasesCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner mt-4 ">
 
-          <div class="d-none d-md-block" *ngIf="desktopView">
+          <div class="" *ngIf="desktopView">
             <div class="carousel-item"
                 *ngFor="let i of [0,1]; first as isFirstItem"
                 [class.active]="isFirstItem">
@@ -62,7 +62,7 @@
             </div>
           </div>
 
-          <div class="d-block d-md-none" *ngIf="!desktopView">
+          <div class="" *ngIf="!desktopView">
 
             <div class="carousel-item"
                 *ngFor="let book of (books$ | async); let i = index"

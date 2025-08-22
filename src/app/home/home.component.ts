@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit{
     
   @HostListener('window:resize')
   onResize(){
-    if(window.innerWidth <= 800)
+    if(window.innerWidth <= 768)
       this.desktopView = false;
     else{
       this.desktopView = true;
