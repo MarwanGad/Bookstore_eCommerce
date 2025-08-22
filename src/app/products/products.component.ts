@@ -18,6 +18,9 @@ export class ProductsComponent implements OnInit ,OnDestroy{
   choosenGenre: string | null = null;
   booksSubscription: Subscription | null = null;
 
+  itemsPerPage: number = 8;
+  currentPage: number = 1;
+
   constructor(private book: BookService,
               private route: ActivatedRoute,
               private cartService: ShoppingCartService){}
@@ -29,10 +32,18 @@ export class ProductsComponent implements OnInit ,OnDestroy{
     ]).subscribe(([books,params])=>{
       this.books = books;
       this.choosenGenre = params.get('genre');
-      this.filteredBooks = this.choosenGenre ?
+      this.currentPage = +(params.get('page') || 1);
+
+      let filtered = this.choosenGenre ?
         books.filter(book => book.genre.toLowerCase() === this.choosenGenre?.toLowerCase()) :
         books;
+
+      const startIndex = ( this.currentPage - 1 ) * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+          
+      this.filteredBooks = filtered.slice(startIndex, endIndex);
     })
+
 
   }
 

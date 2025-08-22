@@ -19,5 +19,14 @@
     color: #cda87d;
 }
 
+.page-item.active .page-link {
+  background-color: #29292a; 
+  border: none;
+  color: #cda87d;
+}
 
+
+.page-item .page-link {
+  color: #000; 
+}
 

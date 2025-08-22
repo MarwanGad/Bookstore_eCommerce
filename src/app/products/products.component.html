@@ -26,6 +26,38 @@
         </div>
       </div>
     </div>
+    <nav >
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <a class="page-link tabs-font tabs-font-family"
+            [routerLink]="['/products']"
+            [queryParams]="{ page: currentPage - 1 }"
+            aria-label="Previous">
+            &laquo;
+          </a>
+        </li>
+
+        <li class="page-item"
+            *ngFor="let page of [0, ( filteredBooks.length / itemsPerPage) ] ; let i = index"
+            [class.active]="currentPage === (i+1)">
+          <a class="page-link tabs-font tabs-font-family"
+            [routerLink]="['/products']"
+            [queryParams]="{ page: i+1 }">
+            {{ i+1 }}
+          </a>
+        </li>
+
+        <li class="page-item">
+          <a class="page-link"
+            [routerLink]="['/products']"
+            [queryParams]="{ page: currentPage + 1 }"
+            aria-label="Next">
+            &raquo;
+          </a>
+        </li>
+      </ul>
+    </nav>
+
 
 
   </div>
