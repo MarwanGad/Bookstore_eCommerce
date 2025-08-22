@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { ShoppingCartService } from './../services/shopping-cart.service';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { bookInterface } from '../models/book.interface';
+import { FavouriteService } from '../services/favourite.service';
 
 @Component({
   selector: 'product-card',
@@ -21,13 +22,20 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   @Input('clickAble') clickAble: boolean = false;
   @Input('showIcons') showIcons: boolean = false;
 
-  constructor(private shoppingCart: ShoppingCartService ){}
+  constructor(private shoppingCart: ShoppingCartService,private favourtieService: FavouriteService ){}
 
 
   async addToCart(event: Event, bookToAdd: bookInterface){
     event.stopPropagation();
     this.actionMessage = 'Added to Cart';
     this.shoppingCart.addToCart(bookToAdd);
+
+  }
+
+  async addToFav(event: Event, bookToAdd: bookInterface){
+    event.stopPropagation();
+    this.actionMessage = 'Added to Favourite';
+    this.favourtieService.addToFav(bookToAdd);
 
   }
 

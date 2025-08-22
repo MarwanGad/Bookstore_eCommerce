@@ -1,0 +1,45 @@
+<div class="container-fluid p-0">
+  <picture>
+    <img src="/favourties.png" class="w-100" style="min-height: 100px; max-height:300px ; object-fit:cover; object-position:center;" alt="cart Banner">
+  </picture>
+</div>
+
+<section class="h-100 h-custom">
+  <div class="container h-100 py-5">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col">
+
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" class="h5">Favourites</th>
+                <th scope="col">Add to cart</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let fav of favs">
+                <th scope="row">
+                  <div class="d-flex align-items-center">
+                    <img [routerLink]="['/products/',fav.id]" [src]="fav.imgUrl" class="img-fluid rounded-3"
+                      style="width: 120px;" alt="Book">
+                    <div class="flex-column ms-4">
+                      <p class="mb-2">{{ fav.title}}</p>
+                      <p class="mb-0">{{fav.author}}</p>
+                    </div>
+                  </div>
+                </th>
+                <td class="align-middle">
+                  <a (click)="addToCart(fav)" class="mb-0" style="font-weight: 500; cursor: pointer;">Add to cart</a>
+                </td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</section>

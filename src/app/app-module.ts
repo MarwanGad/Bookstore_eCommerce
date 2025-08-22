@@ -37,6 +37,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import player from 'lottie-web';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import { FavouritesComponent } from './favourites/favourites.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     ProductCardComponent,
     EditProfileComponent,
     ProfileComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    FavouritesComponent
   ],
   imports: [
     BrowserModule,
@@ -72,6 +74,7 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
       { path: 'login' , component: LoginComponent},
       { path: 'register' , component: RegisterComponent},
       { path: 'shopping-cart' , component: ShoppingCartComponent},
+      { path: 'favourites', component: FavouritesComponent},
       { path: 'order-success' , component: OrderSuccessComponent, canActivate: [AuthGaurd]},
       { path: 'orders/:orderId' , component: OrderDetailsComponent, canActivate: [AuthGaurd]},
       { path: 'account/my-orders' , component: MyOrdersComponent,  canActivate: [AuthGaurd]},

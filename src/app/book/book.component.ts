@@ -4,6 +4,7 @@ import { BookService } from './../services/book.service';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ShoppingCartService } from '../services/shopping-cart.service';
+import { FavouriteService } from '../services/favourite.service';
 
 @Component({
   selector: 'app-book',
@@ -16,13 +17,19 @@ export class BookComponent {
   
   constructor(private book:BookService,
               private route: ActivatedRoute, 
-              private cartService: ShoppingCartService){
+              private cartService: ShoppingCartService,
+              private favSerivce: FavouriteService){
 
     const bookId= this.route.snapshot.paramMap.get('id');
     this.book$  = this.book.getBook(bookId);
   }
 
-  addItem(bookToAdd: bookInterface){
+  addItemToCart(bookToAdd: bookInterface){
     this.cartService.addToCart(bookToAdd);
   }
+  addItemToFav(bookToAdd: bookInterface){
+    this.favSerivce.addToFav(bookToAdd);
+  }
+
+
 }

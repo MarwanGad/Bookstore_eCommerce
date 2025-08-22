@@ -13,6 +13,7 @@
         <div *ngIf="showCardIcons && showIcons" class="btn position-absolute bg-dark m-2 p-2 d-flex gap-2 align-items-center" >
             <i (click)="addToCart($event,bookObj)" class="bi bi-cart text-white fs-6"></i>
             <span class="text-white">{{itemQuantity}}</span>
+            <i (click)="addToFav($event,bookObj)" class="bi bi-heart-fill text-white fs-6"></i>
         </div>
         <ngb-toast
         *ngIf="actionMessage"

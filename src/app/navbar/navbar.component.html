@@ -7,6 +7,9 @@
       <a class="nav-link tabs-font tabs-font-family d-flex gap-1" routerLink="/shopping-cart" routerLinkActive="active-link">
         Cart <span class="badge d-flex align-items-center">{{cartQuantity}}</span>
       </a>
+      <a class="nav-link tabs-font tabs-font-family d-flex gap-1" routerLink="/favourites" routerLinkActive="active-link">
+        Favourites <span class="badge d-flex align-items-center">{{favQuantity}}</span>
+      </a>
     </div>
 
     <a class="navbar-brand position-absolute top-50 start-50 translate-middle mt-2" routerLink="/">
@@ -57,6 +60,7 @@
           <li class="nav-item"><a class="nav-link" routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">Home</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="/products" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" [queryParamsHandling]="'merge'">Products</a></li>
           <li class="nav-item"><a class="nav-link d-flex align-items-center" routerLink="/shopping-cart" routerLinkActive="active-link">Cart <span class="badge ms-1">{{cartQuantity}}</span></a></li>
+          <li class="nav-item"><a class="nav-link d-flex align-items-center" routerLink="/favourites" routerLinkActive="active-link">Favourites <span class="badge ms-1">{{favQuantity}}</span></a></li>
         </ul>
         <hr>
         <div class="d-flex flex-column gap-3 " *ngIf="currentUser; else mobileGuest">
